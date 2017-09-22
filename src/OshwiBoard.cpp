@@ -10,6 +10,7 @@
 
 OshwiBoard::OshwiBoard()
     : _clock(this, _clockTick)
+    , _wifi(WIFI_SSID, WIFI_PASS)
 {
 }
 
@@ -23,5 +24,8 @@ void OshwiBoard::init()
 
 void OshwiBoard::_clockTick(void* watcher, uint32_t unix_time)
 {
-    digitalWrite(PIN_LED, unix_time % 2 == 0? LOW : HIGH);
+    OshwiBoard* self = (OshwiBoard*) watcher;
+
+    if (self->_wifi.isConnected())
+        digitalWrite(PIN_LED, unix_time % 2 == 0? LOW : HIGH);
 }

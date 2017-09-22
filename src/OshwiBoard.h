@@ -11,6 +11,7 @@
 #define PIN_LED 2
 
 #include "Clock.h"
+#include "Wifi.h"
 
 class OshwiBoard
 {
@@ -24,6 +25,8 @@ class OshwiBoard
 
         Clock _clock;
         static void _clockTick(void* watcher, uint32_t unix_time);
+
+        Wifi _wifi;
 };
 
 #endif // _OSHWI_H
