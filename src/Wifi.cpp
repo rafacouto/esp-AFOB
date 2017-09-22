@@ -15,9 +15,10 @@ Wifi::Wifi(const char* ssid, const char* password)
     _ssid = ssid;
     _password = password;
 
-    WiFi.mode(WIFI_STA);
     WiFi.setAutoConnect(false);
     WiFi.setAutoReconnect(true);
+    WiFi.mode(WIFI_OFF);
+    WiFi.disconnect(true);
 }
 
 
@@ -29,6 +30,7 @@ bool Wifi::isConnected()
 
 void Wifi::connect()
 {
+    WiFi.mode(WIFI_STA);
     WiFi.begin(_ssid, _password);
 }
 

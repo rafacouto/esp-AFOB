@@ -9,9 +9,11 @@
 #define _OSHWI_H
 
 #define PIN_LED 2
+#define PIN_PIXELS 4
 
 #include "Clock.h"
 #include "Wifi.h"
+#include "PixelArray.h"
 
 class OshwiBoard
 {
@@ -27,6 +29,8 @@ class OshwiBoard
         static void _clockTick(void* watcher, uint32_t unix_time);
 
         Wifi _wifi;
+
+        PixelArray _pixels;
 };
 
 #endif // _OSHWI_H
