@@ -18,13 +18,14 @@ OshwiBoard::OshwiBoard()
 
 void OshwiBoard::init()
 {
-    // ESP-12E built-in LED is low-activated
-    pinMode(PIN_LED, OUTPUT_OPEN_DRAIN);
-    digitalWrite(PIN_LED, HIGH);
-
     _pixels.setBrightness(1);
 }
 
+        static PixelArray::CRGB red = { 255, 0, 0 };
+        static PixelArray::CRGB green = { 0, 255, 0 };
+        static PixelArray::CRGB blue = { 0, 0, 255 };
+        static PixelArray::CRGB white = { 255, 255, 255 };
+        static PixelArray::CRGB black = { 0, 0, 0 };
 
 void OshwiBoard::_clockTick(void* watcher, uint32_t unix_time)
 {
@@ -32,21 +33,18 @@ void OshwiBoard::_clockTick(void* watcher, uint32_t unix_time)
 
     bool even = (unix_time % 2 == 0);
 
-    if (self->_wifi.isConnected())
-        digitalWrite(PIN_LED, even ? LOW : HIGH);
-
     if (even)
     {
-        static PixelArray::CRGB red = { 200, 0, 0 };
-        static PixelArray::CRGB green = { 0, 200, 0 };
-        static PixelArray::CRGB blue = { 0, 0, 200 };
         self->_pixels.setPixel(0, red);
         self->_pixels.setPixel(1, green);
         self->_pixels.setPixel(2, blue);
-        self->_pixels.show();
+        self->_pixels.setPixel(3, white);
+        self->_pixels.setPixel(4, black);
     }
     else
     {
-        self->_pixels.clear();
+        self->_pixels.setAll(black);
+        self->_pixels.setPixel(4, white);
     }
+    self->_pixels.show();
 }

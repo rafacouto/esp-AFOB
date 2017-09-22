@@ -7,18 +7,17 @@
 
 #include "PixelArray.h"
 
-#define colorSaturation 64
-
-RgbColor red(colorSaturation, 0, 0);
-RgbColor green(0, colorSaturation, 0);
-RgbColor blue(0, 0, colorSaturation);
-RgbColor white(colorSaturation);
-
 
 PixelArray::PixelArray(uint8_t pin)
-    : _strip(PIXEL_COUNT, pin)
+    : _strip(PIXEL_COUNT)
 {
     _strip.Begin();
+}
+
+
+void PixelArray::setBrightness(uint8_t brightness)
+{
+    _strip.SetBrightness(brightness);
 }
 
 
@@ -36,7 +35,7 @@ void PixelArray::show()
 
 void PixelArray::clear()
 {
-    static CRGB black = { 0, 0, 0 };
+static PixelArray::CRGB black = { 0, 0, 0 };
     setAll(black);
     show();
 }

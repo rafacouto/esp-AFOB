@@ -11,6 +11,7 @@
 #define PIXEL_COUNT 5
 
 #include <NeoPixelBrightnessBus.h>
+#include <stdint.h>
 
 class PixelArray
 {
@@ -31,13 +32,13 @@ class PixelArray
         void show();
         void clear();
 
-        void setBrightness(uint8_t brightness) { _strip.SetBrightness(brightness); }
+        void setBrightness(uint8_t brightness);
 
     private:
 
         CRGB _pixels[PIXEL_COUNT];
 
-        NeoPixelBrightnessBus<NeoGrbFeature, NeoEsp8266BitBang800KbpsMethod> _strip;
+        NeoPixelBrightnessBus<NeoGrbFeature, NeoEsp8266Uart800KbpsMethod> _strip;
 };
 
 #endif // _PIXEL_ARRAY
