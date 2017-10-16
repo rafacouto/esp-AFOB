@@ -13,7 +13,7 @@
 
 #include "Clock.h"
 #include "Wifi.h"
-#include "PixelArray.h"
+#include "PixelClock.h"
 
 class OshwiBoard
 {
@@ -23,6 +23,8 @@ class OshwiBoard
 
         void init();
 
+        void tick();
+
     private:
 
         Clock _clock;
@@ -30,7 +32,7 @@ class OshwiBoard
 
         Wifi _wifi;
 
-        PixelArray _pixels;
+        PixelClock _pixels;
 };
 
 #endif // _OSHWI_H

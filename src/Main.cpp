@@ -15,6 +15,7 @@ void setup() {
 }
 
 void loop() {
+    oshwi_2017.tick();
     delay(50);
 }
 

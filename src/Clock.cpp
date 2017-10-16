@@ -12,19 +12,22 @@
 
 Clock::Clock(void* watcher, TickCallback callback)
 {
+    _bootSeconds = 0;
+    _unixTime = 0;
     _watcher = watcher;
     _callback = callback;
-    _unixTime = 0;
-
-    attach_ms(1000, _clock_second_tick, this);
 }
 
 
-void Clock::_second_tick()
+void Clock::tick(uint32_t millis)
 {
-    _unixTime++;
-
-    _callback(_watcher, _unixTime);
+    uint32_t seconds = millis / 1000;
+    if (seconds != _bootSeconds)
+    {
+        if (_unixTime > 0) _unixTime++;
+        _bootSeconds = seconds;
+        _callback(_watcher, _unixTime);
+    }
 }
 
 

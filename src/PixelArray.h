@@ -34,7 +34,7 @@ class PixelArray
 
         void setBrightness(uint8_t brightness);
 
-    private:
+    protected:
 
         CRGB _pixels[PIXEL_COUNT];
 

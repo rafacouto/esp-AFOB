@@ -8,9 +8,9 @@
 #ifndef _CLOCK_H
 #define _CLOCK_H
 
-#include <Ticker.h>
+#include <stdint.h>
 
-class Clock : Ticker
+class Clock
 {
     public:
 
@@ -18,18 +18,20 @@ class Clock : Ticker
 
         Clock(void* watcher, TickCallback callback);
 
+        uint32_t getBootSeconds() { return _bootSeconds; }
+
         void setUnixTime(uint32_t unix_time) { _unixTime = unix_time; }
         uint32_t getUnixTime() { return _unixTime; }
 
+        void tick(uint32_t millis);
+
     private:
+
+        uint32_t _unixTime;
+        uint32_t _bootSeconds;
 
         void* _watcher;
         TickCallback _callback;
-
-        uint32_t _unixTime;
-
-        static void _clock_second_tick(Clock* c) { c->_second_tick(); }
-        void _second_tick();
 };
 
 #endif // _CLOCK_H
